@@ -1,0 +1,105 @@
+Rank,Company,Ticker,Exchange,Sector,Notes
+1,Apple,AAPL,NASDAQ,Technology,Consumer electronics & services
+2,Microsoft,MSFT,NASDAQ,Technology,Software & cloud services
+3,Amazon.com,AMZN,NASDAQ,Consumer Cyclical,E-commerce & cloud
+4,Alphabet (Class A),GOOGL,NASDAQ,Communication Services,Search & advertising
+5,Meta Platforms,META,NASDAQ,Communication Services,Social media & VR
+6,Tesla,TSLA,NASDAQ,Automotive,Electric vehicles & energy
+7,NVIDIA,NVDA,NASDAQ,Semiconductors,GPUs & AI chips
+8,Intel,INTC,NASDAQ,Semiconductors,Chipmaker
+9,Advanced Micro Devices,AMD,NASDAQ,Semiconductors,Chips & processors
+10,Qualcomm,QCOM,NASDAQ,Semiconductors,Wireless chipsets
+11,Broadcom,AVGO,NASDAQ,Semiconductors,Semiconductor & software
+12,Cisco Systems,CSCO,NASDAQ,Technology,Networking hardware
+13,Oracle,ORCL,NYSE,Technology,Database & enterprise software
+14,IBM,IBM,NYSE,Technology,IT & consulting
+15,Adobe,ADBE,NASDAQ,Software,Creative software
+16,Netflix,NFLX,NASDAQ,Streaming,Entertainment streaming
+17,Walt Disney Company,DIS,NYSE,Entertainment,Media & theme parks
+18,Nike,NKE,NYSE,Apparel,Sportswear & shoes
+19,McDonald's,MCD,NYSE,Restaurants,Fast food
+20,Coca-Cola,KO,NYSE,Beverages,Soft drinks
+21,PepsiCo,PEP,NASDAQ,Beverages & Snacks,Soft drinks & snacks
+22,Starbucks,SBUX,NASDAQ,Restaurants,Coffee chain
+23,Walmart,WMT,NYSE,Retail,Retail & supermarkets
+24,Costco Wholesale,COST,NASDAQ,Retail,Wholesale retailer
+25,Target,TGT,NYSE,Retail,General retail stores
+26,Home Depot,HD,NYSE,Retail,Home improvement
+27,Lowe's Companies,LOW,NYSE,Retail,Home improvement
+28,Johnson & Johnson,JNJ,NYSE,Healthcare,Healthcare & consumer products
+29,Pfizer,PFE,NYSE,Healthcare,Pharmaceuticals
+30,Moderna,MRNA,NASDAQ,Healthcare,Biotechnology
+31,Merck & Co.,MRK,NYSE,Healthcare,Pharmaceuticals
+32,Eli Lilly,LLY,NYSE,Healthcare,Pharmaceuticals
+33,Abbott Laboratories,ABT,NYSE,Healthcare,Medical devices & healthcare
+34,Procter & Gamble,PG,NYSE,Consumer Goods,Household & personal care
+35,Unilever (ADR),UL,NYSE,Consumer Goods,Household & food brands
+36,Colgate-Palmolive,CL,NYSE,Consumer Goods,Oral care & household
+37,Mondelez International,MDLZ,NASDAQ,Food,Snacks & confectionery
+38,Kraft Heinz,KHC,NASDAQ,Food,Packaged foods
+39,General Mills,GIS,NYSE,Food,Packaged foods
+40,Nestlé (ADR),NSRGY,OTC,Food,Packaged foods & beverages
+41,Ford Motor Company,F,NYSE,Automotive,Automaker
+42,General Motors,GM,NYSE,Automotive,Automaker
+43,Boeing,BA,NYSE,Aerospace,Aircraft manufacturing
+44,Lockheed Martin,LMT,NYSE,Defense,Defense contractor
+45,Raytheon Technologies,RTX,NYSE,Defense,Defense & aerospace
+46,Northrop Grumman,NOC,NYSE,Defense,Defense contractor
+47,Exxon Mobil,XOM,NYSE,Energy,Oil & gas
+48,Chevron,CVX,NYSE,Energy,Oil & gas
+49,Shell (ADR),SHEL,NYSE,Energy,Oil & gas
+50,BP (ADR),BP,NYSE,Energy,Oil & gas
+51,Goldman Sachs,GS,NYSE,Finance,Investment banking
+52,JPMorgan Chase,JPM,NYSE,Finance,Banking & financial services
+53,Morgan Stanley,MS,NYSE,Finance,Investment banking
+54,Bank of America,BAC,NYSE,Finance,Banking & financial services
+55,Wells Fargo,WFC,NYSE,Finance,Banking & financial services
+56,Citigroup,C,NYSE,Finance,Banking & financial services
+57,Visa,V,NYSE,Finance,Payment processing
+58,Mastercard,MA,NYSE,Finance,Payment processing
+59,American Express,AXP,NYSE,Finance,Credit cards
+60,PayPal,PYPL,NASDAQ,Finance,Digital payments
+61,Square (Block),SQ,NYSE,Finance,Fintech payments
+62,Uber Technologies,UBER,NYSE,Transportation,Ride-hailing & delivery
+63,Lyft,LYFT,NASDAQ,Transportation,Ride-hailing
+64,Airbnb,ABNB,NASDAQ,Travel,Vacation rentals
+65,Booking Holdings,BKNG,NASDAQ,Travel,Online travel agency
+66,Expedia Group,EXPE,NASDAQ,Travel,Online travel agency
+67,Delta Air Lines,DAL,NYSE,Airlines,Airline operator
+68,United Airlines Holdings,UAL,NASDAQ,Airlines,Airline operator
+69,American Airlines Group,AAL,NASDAQ,Airlines,Airline operator
+70,Southwest Airlines,LUV,NYSE,Airlines,Airline operator
+71,Hilton Worldwide,HLT,NYSE,Hotels,Hotel chain
+72,Marriott International,MAR,NASDAQ,Hotels,Hotel chain
+73,Chipotle Mexican Grill,CMG,NYSE,Restaurants,Fast-casual restaurant
+74,Yum! Brands,YUM,NYSE,Restaurants,"KFC, Pizza Hut, Taco Bell"
+75,Domino's Pizza,DPZ,NYSE,Restaurants,Pizza delivery
+76,Burger King (Restaurant Brands Intl),QSR,NYSE,Restaurants,Fast food
+77,Samsung Electronics (ADR),SSNLF-deprecated,OTC,Technology,Electronics & smartphones
+78,Sony Group (ADR),SONY,NYSE,Consumer Electronics,Electronics & entertainment
+79,Nintendo (ADR),NTDOY,OTC,Entertainment,Gaming consoles
+80,Electronic Arts,EA,NASDAQ,Entertainment,Video games
+81,Activision Blizzard,ATVI,NASDAQ,Entertainment,Video games (acquired by MSFT)
+82,Take-Two Interactive,TTWO,NASDAQ,Entertainment,Video games
+83,Roblox Corporation,RBLX,NYSE,Entertainment,Online gaming platform
+84,Zoom Video Communications,ZM,NASDAQ,Technology,Video conferencing
+85,Snap Inc.,SNAP,NYSE,Social Media,Social media app
+86,Pinterest,PINS,NYSE,Social Media,Social media platform
+87,Twitter (now private/X),N/A,N/A,Social Media,Acquired & private
+88,Spotify Technology,SPOT,NYSE,Entertainment,Music streaming
+89,Roku,ROKU,NASDAQ,Entertainment,Streaming devices & platform
+90,Dell Technologies,DELL,NYSE,Technology,PCs & IT hardware
+91,HP Inc.,HPQ,NYSE,Technology,PCs & printers
+92,Uber Eats (within Uber),UBER,NYSE,Delivery,Food delivery
+93,DoorDash,DASH,NYSE,Delivery,Food delivery
+94,FedEx,FDX,NYSE,Logistics,Logistics & delivery
+95,United Parcel Service,UPS,NYSE,Logistics,Parcel delivery
+96,3M Company,MMM,NYSE,Industrials,Diversified industrials
+97,Caterpillar,CAT,NYSE,Industrials,Construction equipment
+98,Deere & Company,DE,NYSE,Industrials,Agricultural machinery
+99,Sony Pictures (within Sony),SONY,NYSE,Entertainment,Movies & TV
+100,Paramount Global,PARA,NASDAQ,Entertainment,Media & TV
+101,Warner Bros. Discovery,WBD,NASDAQ,Entertainment,Media & streaming
+102,Comcast Corporation,CMCSA,NASDAQ,Telecom & Media,Cable & broadband
+103,AT&T,T,NYSE,Telecom,Telecommunications & media
+104,Verizon Communications,VZ,NYSE,Telecom,Telecommunications

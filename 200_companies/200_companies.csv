@@ -1,0 +1,212 @@
+Company Name,Ticker,Sector,Exchange
+Apple Inc,AAPL,Technology,NASDAQ
+Microsoft Corporation,MSFT,Technology,NASDAQ
+Amazon.com Inc,AMZN,Consumer Discretionary,NASDAQ
+Alphabet Inc Class A,GOOGL,Technology,NASDAQ
+Tesla Inc,TSLA,Automotive,NASDAQ
+Meta Platforms Inc,META,Technology,NASDAQ
+Berkshire Hathaway Inc Class B,BRK.B,Financial Services,NYSE
+NVIDIA Corporation,NVDA,Technology,NASDAQ
+Exxon Mobil Corporation,XOM,Energy,NYSE
+Johnson & Johnson,JNJ,Healthcare,NYSE
+UnitedHealth Group Inc,UNH,Healthcare,NYSE
+JPMorgan Chase & Co,JPM,Financial Services,NYSE
+Procter & Gamble Company,PG,Consumer Staples,NYSE
+Visa Inc Class A,V,Financial Services,NYSE
+Home Depot Inc,HD,Consumer Discretionary,NYSE
+Chevron Corporation,CVX,Energy,NYSE
+Mastercard Inc Class A,MA,Financial Services,NYSE
+Pfizer Inc,PFE,Healthcare,NYSE
+Bank of America Corporation,BAC,Financial Services,NYSE
+Coca-Cola Company,KO,Consumer Staples,NYSE
+PepsiCo Inc,PEP,Consumer Staples,NASDAQ
+Abbott Laboratories,ABT,Healthcare,NYSE
+Costco Wholesale Corporation,COST,Consumer Staples,NASDAQ
+Disney (Walt) Company,DIS,Communication Services,NYSE
+Cisco Systems Inc,CSCO,Technology,NASDAQ
+AbbVie Inc,ABBV,Healthcare,NYSE
+Merck & Co Inc,MRK,Healthcare,NYSE
+Salesforce Inc,CRM,Technology,NYSE
+Thermo Fisher Scientific Inc,TMO,Healthcare,NYSE
+McDonald's Corporation,MCD,Consumer Discretionary,NYSE
+Netflix Inc,NFLX,Communication Services,NASDAQ
+Oracle Corporation,ORCL,Technology,NYSE
+Accenture plc Class A,ACN,Information Technology,NYSE
+Walmart Inc,WMT,Consumer Staples,NYSE
+Adobe Inc,ADBE,Technology,NASDAQ
+Nike Inc Class B,NKE,Consumer Discretionary,NYSE
+Comcast Corporation Class A,CMCSA,Communication Services,NASDAQ
+Verizon Communications Inc,VZ,Communication Services,NYSE
+AT&T Inc,T,Communication Services,NYSE
+Intel Corporation,INTC,Technology,NASDAQ
+Broadcom Inc,AVGO,Technology,NASDAQ
+NextEra Energy Inc,NEE,Utilities,NYSE
+Union Pacific Corporation,UNP,Industrials,NYSE
+Lilly (Eli) and Company,LLY,Healthcare,NYSE
+American Express Company,AXP,Financial Services,NYSE
+Caterpillar Inc,CAT,Industrials,NYSE
+Morgan Stanley,MS,Financial Services,NYSE
+Wells Fargo & Company,WFC,Financial Services,NYSE
+International Business Machines,IBM,Technology,NYSE
+General Electric Company,GE,Industrials,NYSE
+Starbucks Corporation,SBUX,Consumer Discretionary,NASDAQ
+CVS Health Corporation,CVS,Healthcare,NYSE
+Goldman Sachs Group Inc,GS,Financial Services,NYSE
+Texas Instruments Inc,TXN,Technology,NASDAQ
+Lockheed Martin Corporation,LMT,Industrials,NYSE
+Honeywell International Inc,HON,Industrials,NYSE
+Boeing Company,BA,Industrials,NYSE
+American Tower Corporation,AMT,Real Estate,NYSE
+Mondelez International Inc Class A,MDLZ,Consumer Staples,NASDAQ
+PayPal Holdings Inc,PYPL,Financial Services,NASDAQ
+ConocoPhillips,COP,Energy,NYSE
+Advanced Micro Devices Inc,AMD,Technology,NASDAQ
+Danaher Corporation,DHR,Healthcare,NYSE
+Lowe's Companies Inc,LOW,Consumer Discretionary,NYSE
+Qualcomm Inc,QCOM,Technology,NASDAQ
+ServiceNow Inc,NOW,Technology,NYSE
+Booking Holdings Inc,BKNG,Consumer Discretionary,NASDAQ
+Medtronic plc,MDT,Healthcare,NYSE
+United Parcel Service Inc Class B,UPS,Industrials,NYSE
+Raytheon Technologies Corporation,RTX,Industrials,NYSE
+Philip Morris International Inc,PM,Consumer Staples,NYSE
+Bristol-Myers Squibb Company,BMY,Healthcare,NYSE
+Intuit Inc,INTU,Technology,NASDAQ
+Charles Schwab Corporation,SCHW,Financial Services,NYSE
+Amgen Inc,AMGN,Healthcare,NASDAQ
+BlackRock Inc,BLK,Financial Services,NYSE
+S&P Global Inc,SPGI,Financial Services,NYSE
+Deere & Company,DE,Industrials,NYSE
+Target Corporation,TGT,Consumer Discretionary,NYSE
+FedEx Corporation,FDX,Industrials,NYSE
+Citigroup Inc,C,Financial Services,NYSE
+Altria Group Inc,MO,Consumer Staples,NYSE
+General Motors Company,GM,Automotive,NYSE
+Ford Motor Company,F,Automotive,NYSE
+Applied Materials Inc,AMAT,Technology,NASDAQ
+Micron Technology Inc,MU,Technology,NASDAQ
+Northrop Grumman Corporation,NOC,Industrials,NYSE
+Duke Energy Corporation,DUK,Utilities,NYSE
+Southern Company,SO,Utilities,NYSE
+Shopify Inc Class A,SHOP,Technology,NYSE
+Square Inc Class A,SQ,Financial Services,NYSE
+Zoom Video Communications Inc Class A,ZM,Technology,NASDAQ
+Moderna Inc,MRNA,Healthcare,NASDAQ
+CrowdStrike Holdings Inc Class A,CRWD,Technology,NASDAQ
+DoorDash Inc Class A,DASH,Consumer Discretionary,NYSE
+Uber Technologies Inc,UBER,Technology,NYSE
+Lyft Inc Class A,LYFT,Technology,NASDAQ
+Airbnb Inc Class A,ABNB,Consumer Discretionary,NASDAQ
+Pinterest Inc Class A,PINS,Communication Services,NYSE
+Snap Inc Class A,SNAP,Communication Services,NYSE
+Spotify Technology S.A.,SPOT,Communication Services,NYSE
+TJX Companies Inc,TJX,Consumer Discretionary,NYSE
+Ross Stores Inc,ROST,Consumer Discretionary,NASDAQ
+Chipotle Mexican Grill Inc,CMG,Consumer Discretionary,NYSE
+Domino's Pizza Inc,DPZ,Consumer Discretionary,NYSE
+Yum! Brands Inc,YUM,Consumer Discretionary,NYSE
+Best Buy Co Inc,BBY,Consumer Discretionary,NYSE
+GameStop Corp Class A,GME,Consumer Discretionary,NYSE
+AMC Entertainment Holdings Inc Class A,AMC,Communication Services,NYSE
+Electronic Arts Inc,EA,Technology,NASDAQ
+Activision Blizzard Inc,ATVI,Technology,NASDAQ
+Take-Two Interactive Software Inc,TTWO,Technology,NASDAQ
+Unity Software Inc,U,Technology,NYSE
+Roblox Corporation Class A,RBLX,Technology,NYSE
+DraftKings Inc Class A,DKNG,Consumer Discretionary,NASDAQ
+MGM Resorts International,MGM,Consumer Discretionary,NYSE
+Caesars Entertainment Inc,CZR,Consumer Discretionary,NASDAQ
+Wynn Resorts Limited,WYNN,Consumer Discretionary,NASDAQ
+Las Vegas Sands Corp,LVS,Consumer Discretionary,NYSE
+Marriott International Inc Class A,MAR,Consumer Discretionary,NASDAQ
+Hilton Worldwide Holdings Inc,HLT,Consumer Discretionary,NYSE
+Hyatt Hotels Corporation Class A,H,Consumer Discretionary,NYSE
+Expedia Group Inc,EXPE,Consumer Discretionary,NASDAQ
+TripAdvisor Inc,TRIP,Consumer Discretionary,NASDAQ
+Carnival Corporation,CCL,Consumer Discretionary,NYSE
+Royal Caribbean Cruises Ltd,RCL,Consumer Discretionary,NYSE
+Norwegian Cruise Line Holdings Ltd,NCLH,Consumer Discretionary,NYSE
+Delta Air Lines Inc,DAL,Industrials,NYSE
+American Airlines Group Inc,AAL,Industrials,NASDAQ
+United Airlines Holdings Inc,UAL,NASDAQ,NASDAQ
+Southwest Airlines Co,LUV,Industrials,NYSE
+JetBlue Airways Corporation,JBLU,Industrials,NASDAQ
+Alaska Air Group Inc,ALK,Industrials,NYSE
+Spirit Airlines Inc,SAVE,Industrials,NYSE
+Hertz Global Holdings Inc,HTZ,Industrials,NASDAQ
+Avis Budget Group Inc,CAR,Industrials,NASDAQ
+Yelp Inc,YELP,Communication Services,NYSE
+GrubHub Inc,GRUB,Consumer Discretionary,NYSE
+Wendy's Company,WEN,Consumer Discretionary,NASDAQ
+Jack in the Box Inc,JACK,Consumer Discretionary,NASDAQ
+Texas Roadhouse Inc,TXRH,Consumer Discretionary,NASDAQ
+Etsy Inc,ETSY,Consumer Discretionary,NASDAQ
+Wayfair Inc Class A,W,Consumer Discretionary,NYSE
+Beyond Meat Inc,BYND,Consumer Staples,NASDAQ
+Planet Fitness Inc Class A,PLNT,Consumer Discretionary,NYSE
+Shake Shack Inc Class A,SHAK,Consumer Discretionary,NYSE
+Cheesecake Factory Inc,CAKE,Consumer Discretionary,NASDAQ
+Darden Restaurants Inc,DRI,Consumer Discretionary,NYSE
+Macy's Inc,M,Consumer Discretionary,NYSE
+Nordstrom Inc,JWN,Consumer Discretionary,NYSE
+Kohl's Corporation,KSS,Consumer Discretionary,NYSE
+Gap Inc,GPS,Consumer Discretionary,NYSE
+American Eagle Outfitters Inc,AEO,Consumer Discretionary,NYSE
+Abercrombie & Fitch Company Class A,ANF,Consumer Discretionary,NYSE
+Urban Outfitters Inc,URBN,Consumer Discretionary,NASDAQ
+Levi Strauss & Co Class A,LEVI,Consumer Discretionary,NYSE
+VF Corporation,VFC,Consumer Discretionary,NYSE
+Under Armour Inc Class A,UAA,Consumer Discretionary,NYSE
+Foot Locker Inc,FL,Consumer Discretionary,NYSE
+Dick's Sporting Goods Inc,DKS,Consumer Discretionary,NYSE
+Live Nation Entertainment Inc,LYV,Communication Services,NYSE
+Cinemark Holdings Inc,CNK,Communication Services,NYSE
+Madison Square Garden Sports Corp Class A,MSGS,Communication Services,NYSE
+Zynga Inc Class A,ZNGA,Technology,NASDAQ
+Match Group Inc,MTCH,Communication Services,NASDAQ
+Restaurant Brands International Inc,QSR,Consumer Discretionary,NYSE
+Papa John's International Inc,PZZA,Consumer Discretionary,NASDAQ
+Wingstop Inc,WING,Consumer Discretionary,NASDAQ
+Sonic Corp,SONC,Consumer Discretionary,NASDAQ
+Cracker Barrel Old Country Store Inc,CBRL,Consumer Discretionary,NASDAQ
+Denny's Corporation,DENN,Consumer Discretionary,NASDAQ
+Twitter Inc,TWTR,Communication Services,NYSE
+Roku Inc Class A,ROKU,Communication Services,NASDAQ
+Palantir Technologies Inc Class A,PLTR,Technology,NYSE
+Snowflake Inc Class A,SNOW,Technology,NYSE
+Datadog Inc Class A,DDOG,Technology,NASDAQ
+Twilio Inc Class A,TWLO,Technology,NYSE
+BioNTech SE,BNTX,Healthcare,NASDAQ
+Peloton Interactive Inc Class A,PTON,Consumer Discretionary,NASDAQ
+Humana Inc,HUM,Healthcare,NYSE
+Anthem Inc,ANTM,Healthcare,NYSE
+Aon plc Class A,AON,Financial Services,NYSE
+ASML Holding N.V.,ASML,Technology,NASDAQ
+Marathon Petroleum Corporation,MPC,Energy,NYSE
+Valero Energy Corporation,VLO,Energy,NYSE
+Phillips 66,PSX,Energy,NYSE
+Kinder Morgan Inc,KMI,Energy,NYSE
+Enterprise Products Partners L.P.,EPD,Energy,NYSE
+Schlumberger Limited,SLB,Energy,NYSE
+EOG Resources Inc,EOG,Energy,NYSE
+Pioneer Natural Resources Company,PXD,Energy,NASDAQ
+Enbridge Inc,ENB,Energy,NYSE
+TC Energy Corporation,TRP,Energy,NYSE
+Kimberly-Clark Corporation,KMB,Consumer Staples,NYSE
+Colgate-Palmolive Company,CL,Consumer Staples,NYSE
+Clorox Company,CLX,NYSE,NYSE
+General Mills Inc,GIS,Consumer Staples,NYSE
+Kellogg Company,K,Consumer Staples,NYSE
+Kraft Heinz Company,KHC,Consumer Staples,NASDAQ
+Tyson Foods Inc Class A,TSN,Consumer Staples,NYSE
+Hormel Foods Corporation,HRL,Consumer Staples,NYSE
+Campbell Soup Company,CPB,Consumer Staples,NYSE
+Conagra Brands Inc,CAG,Consumer Staples,NYSE
+McCormick & Company Inc,MKC,Consumer Staples,NYSE
+Hershey Company,HSY,Consumer Staples,NYSE
+Molson Coors Beverage Company Class B,TAP,Consumer Staples,NYSE
+Boston Beer Company Inc Class A,SAM,Consumer Staples,NYSE
+Monster Beverage Corporation,MNST,Consumer Staples,NASDAQ
+Constellation Brands Inc Class A,STZ,Consumer Staples,NYSE
+Diageo plc,DEO,Consumer Staples,NYSE
+Brown-Forman Corporation Class B,BF.B,Consumer Staples,NYSE
