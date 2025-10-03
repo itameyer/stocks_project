@@ -1,9 +1,7 @@
 import multiprocessing
-
 import yfinance as yf
 from multiprocessing import Pool
 import pandas as pd
-from typing import List
 import os
 from pandas.tseries.offsets import DateOffset
 
@@ -15,13 +13,12 @@ class DropsFinder:
     INTERVAL = "1d"
     PERIOD_MONTH_LOOKUP_AFTER_DROP = 48
 
-    def __init__(self,directory:str, lock):
+    def __init__(self, directory:str, lock: multiprocessing.Lock):
         self._tickers = self._extract_tickers()
         self._logs_dir = f"{os.path.dirname(os.path.abspath(__file__))}/{directory}/logs"
         self._output_file = f"{os.path.dirname(os.path.abspath(__file__))}/{directory}/prices.csv"
         if os.path.exists(self._output_file):
             os.remove(self._output_file)
-        self._averages_file = f"{os.path.dirname(os.path.abspath(__file__))}/{directory}/averages.csv"
 
         self._output_file_lock = lock
         os.makedirs(self._logs_dir, exist_ok=True)
@@ -79,35 +76,12 @@ class DropsFinder:
             with open(log_file_path, 'w') as f:
                 f.write(str(e))
 
-    def construct_averages_csv(self):
-        df = pd.read_csv(self._output_file)
-
-        # 2️⃣ If some columns contain non-numeric values (like "123.45 (5%)"), clean them
-        # This removes anything that's not a number, dot, or minus sign
-        columns_to_average = [c for c in df.columns if any(x in c for x in ["W", "M", "Y"])]
-        df_numeric = df[columns_to_average].applymap(
-            lambda x: pd.to_numeric(str(x).replace("%",""), errors='coerce')
-        )
-
-        # 3️⃣ Compute the average for each column
-        averages = df_numeric.mean()
-
-        # 4️⃣ Convert to DataFrame to save to CSV
-        df_avg = averages.reset_index()
-        df_avg.columns = ["Column", "Average"]
-
-        # 5️⃣ Save to a new CSV file
-        df_avg.to_csv(self._averages_file)
-
-
     def run_workers_pool(self):
         with Pool(processes=8) as pool:
             results = [pool.apply_async(self._find_drop_and_record_price, (ticker,)) for ticker in self._tickers]
 
             for r in results:
                 r.wait()
-
-        self.construct_averages_csv()
 
 if __name__ == "__main__":
     directory = "100_companies"
