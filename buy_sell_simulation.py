@@ -41,8 +41,8 @@ class BuyEvent(Event):
 class Simulation:
 
     INITIAL_SUM = 100_000
-    HOLD_PERIOD_MONTHS = 12
-    SUM_PER_BUY_ORDER = 350
+    HOLD_PERIOD_MONTHS = 1
+    SUM_PER_BUY_ORDER = 1
 
     def __init__(self, prices_csv_path: str):
         self._curr_sum = self.INITIAL_SUM
@@ -105,6 +105,6 @@ class Simulation:
         print(f"min total cash: {min_total_cash}")
 
 if __name__ == "__main__":
-    s = Simulation("100_companies/prices.csv").calc_profitability()
+    s = Simulation("alternating_snp500_2020_at_20%_drop_MA20/prices.csv").calc_profitability()
 
     # https://github.com/fja05680/sp500
