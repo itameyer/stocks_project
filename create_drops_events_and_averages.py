@@ -43,12 +43,20 @@ class Snp500TickersExtractor:
 
 class DropsFinder:
 
-    PERCENTAGE_DROP_THRESHOLD = -0.1
-    START_DATE = pd.Timestamp(2020, 1, 1)
     INTERVAL = "1d"
     PERIOD_MONTH_LOOKUP_AFTER_DROP = 48
 
-    def __init__(self, directory:str, lock: multiprocessing.Lock):
+    def __init__(self,
+                 directory:str,
+                 lock: multiprocessing.Lock,
+                 start_date: pd.Timestamp,
+                 percentage_drop_threshold: float,
+                 moving_days_average_window: int):
+
+        self._start_date = start_date
+        self._percentage_drop_threshold = percentage_drop_threshold
+        self._moving_days_average_window = moving_days_average_window
+
         self._output_file = f"{os.path.dirname(os.path.abspath(__file__))}/{directory}/prices.csv"
         if os.path.exists(self._output_file):
             os.remove(self._output_file)
@@ -58,9 +66,13 @@ class DropsFinder:
         self._logs_dir = f"{os.path.dirname(os.path.abspath(__file__))}/{directory}/logs"
         os.makedirs(self._logs_dir, exist_ok=True)
 
+
+    def _enrich_df(self, full_df: pd.DataFrame):
+        full_df[f"MA{self._moving_days_average_window}"] = full_df["Close"].rolling(window=self._moving_days_average_window).mean()
+        full_df["PctChange"] = full_df[f"MA{self._moving_days_average_window}"].pct_change(periods=self._moving_days_average_window)
+
     def _find_drops(self, full_df: pd.DataFrame, start_Date: pd.Timestamp, end_date: pd.Timestamp) -> pd.DataFrame:
-        full_df["PctChange"] = full_df["Close"].pct_change()
-        cond_percentage_drop = full_df["PctChange"] < self.PERCENTAGE_DROP_THRESHOLD
+        cond_percentage_drop = full_df["PctChange"] < self._percentage_drop_threshold
         cond_start_date = full_df.index > start_Date
         if pd.isna(end_date) or end_date is None:
             cond_end_date = pd.Series(True, index=full_df.index)
@@ -103,9 +115,10 @@ class DropsFinder:
 
     def _find_drop_and_record_price(self, relevant_ticker: TickerInterval):
         try:
-            data = yf.download(relevant_ticker.ticker, start=self.START_DATE, interval=self.INTERVAL)
+            data = yf.download(relevant_ticker.ticker, start=self._start_date, interval=self.INTERVAL)
             data.index = pd.to_datetime(data.index)
 
+            self._enrich_df(data)
             matches = self._find_drops(data, relevant_ticker.start_date, relevant_ticker.end_date)
             self._iterate_rows_and_append_future_prices(matches, data, relevant_ticker.ticker)
 
@@ -117,7 +130,7 @@ class DropsFinder:
     def run_workers_pool(self):
         snp_tickers_df = pd.read_csv("sp500_ticker_start_end.csv")
         ticker_extractor = Snp500TickersExtractor(snp_tickers_df)
-        relevant_tickers_df = ticker_extractor.find_relevant_tickers(self.START_DATE)
+        relevant_tickers_df = ticker_extractor.find_relevant_tickers(self._start_date)
         relevant_tickers = [TickerInterval(*x) for _, x in relevant_tickers_df.iterrows()]
 
         with Pool(processes=8) as pool:
@@ -128,7 +141,13 @@ class DropsFinder:
 
 
 if __name__ == "__main__":
-    directory = "alternating_snp500"
+    MA = 5
+    drop = 20
+    since_year = 2020
+    directory = f"since_{since_year}/alternating_snp500_MA{MA}_drop_{drop}%"
     with multiprocessing.Manager() as manager:
-        lock = manager.Lock()
-        d = DropsFinder(directory,lock).run_workers_pool()
+        DropsFinder(directory=directory,
+                    lock=manager.Lock(),
+                    start_date=pd.Timestamp(since_year, 1, 1),
+                    percentage_drop_threshold=(-1* drop / 100),
+                    moving_days_average_window=MA).run_workers_pool()

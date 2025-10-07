@@ -41,12 +41,13 @@ class BuyEvent(Event):
 class Simulation:
 
     INITIAL_SUM = 100_000
-    HOLD_PERIOD_MONTHS = 1
-    SUM_PER_BUY_ORDER = 1
+    HOLD_PERIOD_MONTHS = 12
+    SUM_PER_BUY_ORDER = 1000
 
-    def __init__(self, prices_csv_path: str):
+    def __init__(self, prices_csv_path: str, moving_average_window: int):
         self._curr_sum = self.INITIAL_SUM
         self._prices_csv_path = prices_csv_path
+        self._ma_window = moving_average_window
 
     def _create_list_of_buy_and_sell_dates(self):
         df = pd.read_csv(self._prices_csv_path)
@@ -84,6 +85,7 @@ class Simulation:
         heapq.heapify(events_min_heap)
 
         bought_events = set()
+        latest_ticker_buy = {}
         soonest_selling_point = {}
         min_total_cash = self.INITIAL_SUM
         while events_min_heap:
@@ -91,9 +93,11 @@ class Simulation:
             event_sum = event.num_stocks * event.price
 
             if event.command_type == CommandType.BUY:
-                # always append soonest buying point, even if not bought
+                # always append soonest selling point, even if not bought
                 soonest_selling_point[event.ticker] = SellPoint(event.date_to_sell, event.price_on_sell)
-                if self._curr_sum - event_sum > 0:
+                time_since_ticker_last_buy = (event.date - latest_ticker_buy[event.ticker]).days if event.ticker in latest_ticker_buy else numpy.inf
+                if self._curr_sum - event_sum > 0 and time_since_ticker_last_buy > self._ma_window:
+                    latest_ticker_buy[event.ticker] = event.date
                     bought_events.add(event.event_id)
                     self._curr_sum -= event_sum
                     min_total_cash = min(self._curr_sum, min_total_cash)
@@ -105,6 +109,6 @@ class Simulation:
         print(f"min total cash: {min_total_cash}")
 
 if __name__ == "__main__":
-    s = Simulation("alternating_snp500_2020_at_20%_drop_MA20/prices.csv").calc_profitability()
+    s = Simulation("since_2020/alternating_snp500_MA5_drop_20%/prices.csv", 5).calc_profitability()
 
     # https://github.com/fja05680/sp500
