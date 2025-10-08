@@ -3,8 +3,10 @@ import yfinance as yf
 from multiprocessing import Pool
 import pandas as pd
 import os
-from pandas.tseries.offsets import DateOffset
 from typing import List, NamedTuple
+
+from gain_strategy import GainStrategyIF, LookupPricesAtRandomMonths, FirstGainAbovePercent
+
 
 class TickerInterval(NamedTuple):
     ticker: str
@@ -51,11 +53,13 @@ class DropsFinder:
                  lock: multiprocessing.Lock,
                  start_date: pd.Timestamp,
                  percentage_drop_threshold: float,
-                 moving_days_average_window: int):
+                 moving_days_average_window: int,
+                 gain_strategy: GainStrategyIF):
 
         self._start_date = start_date
         self._percentage_drop_threshold = percentage_drop_threshold
         self._moving_days_average_window = moving_days_average_window
+        self._gain_strategy = gain_strategy
 
         self._output_file = f"{os.path.dirname(os.path.abspath(__file__))}/{directory}/prices.csv"
         if os.path.exists(self._output_file):
@@ -82,37 +86,6 @@ class DropsFinder:
         matches = full_df[cond_percentage_drop & cond_start_date & cond_end_date]
         return matches
 
-    def _iterate_rows_and_append_future_prices(self, drops_df: pd.DataFrame, full_df: pd.DataFrame, ticker: str):
-        for idx, row in drops_df.iterrows():
-            drop_date = idx
-            record = {
-                "ticker": ticker,
-                "DropDate": drop_date.date(),
-                "Close": round(row["Close"].iloc[0], 2),
-                "PctChange": f"{round(100 * row['PctChange'].iloc[0], 2)}%"
-            }
-
-            offsets = {f"{i}M": DateOffset(months=i) for i in range(1, self.PERIOD_MONTH_LOOKUP_AFTER_DROP + 1)}
-
-            for label, offset in offsets.items():
-                target_date = drop_date + offset
-                # get the next available trading day
-                future_dates = full_df.index[full_df.index >= target_date]
-                if len(future_dates) > 0:
-                    future_date = future_dates[0]
-                    # percentage_diff = round(100*(data.loc[future_date, 'Close'][0]-row['Close'][0])/row['Close'][0],1)
-                    record[f"Close+{label}"] = full_df.loc[future_date, 'Close'].iloc[0]
-                else:
-                    record[f"Close+{label}"] = None
-
-            # Convert to DataFrame for table representation
-            df_table = pd.DataFrame([record])
-
-            # Save table to CSV or log file
-            with self._output_file_lock:
-                output_file_exists = os.path.exists(self._output_file)
-                df_table.to_csv(self._output_file, mode='a', index=False, header=not output_file_exists)
-
     def _find_drop_and_record_price(self, relevant_ticker: TickerInterval):
         try:
             data = yf.download(relevant_ticker.ticker, start=self._start_date, interval=self.INTERVAL)
@@ -120,7 +93,7 @@ class DropsFinder:
 
             self._enrich_df(data)
             matches = self._find_drops(data, relevant_ticker.start_date, relevant_ticker.end_date)
-            self._iterate_rows_and_append_future_prices(matches, data, relevant_ticker.ticker)
+            self._gain_strategy.record_gain_strategy(matches, data, relevant_ticker.ticker, self._output_file, self._output_file_lock)
 
         except Exception as e:
             log_file_path = f"{self._logs_dir}/{relevant_ticker.ticker}.csv"
@@ -133,21 +106,27 @@ class DropsFinder:
         relevant_tickers_df = ticker_extractor.find_relevant_tickers(self._start_date)
         relevant_tickers = [TickerInterval(*x) for _, x in relevant_tickers_df.iterrows()]
 
-        with Pool(processes=8) as pool:
-            results = [pool.apply_async(self._find_drop_and_record_price, (y,) ) for y in relevant_tickers]
+        # with Pool(processes=8) as pool:
+        #     results = [pool.apply_async(self._find_drop_and_record_price, (y,) ) for y in relevant_tickers]
+        #
+        #     for r in results:
+        #         r.wait()
 
-            for r in results:
-                r.wait()
+        for y in relevant_tickers:
+            self._find_drop_and_record_price(y)
 
 
 if __name__ == "__main__":
     MA = 5
-    drop = 20
-    since_year = 2020
-    directory = f"since_{since_year}/alternating_snp500_MA{MA}_drop_{drop}%"
+    drop_percent = 10
+    since_year = 2015
+    rise_percent = 0.1
+    directory = f"time_to_rise/since_{since_year}/time_to_rise_{rise_percent*100}%_MA{MA}_drop_{drop_percent}%"
+    gain_strategy = FirstGainAbovePercent(rise_percent)
     with multiprocessing.Manager() as manager:
         DropsFinder(directory=directory,
                     lock=manager.Lock(),
                     start_date=pd.Timestamp(since_year, 1, 1),
-                    percentage_drop_threshold=(-1* drop / 100),
-                    moving_days_average_window=MA).run_workers_pool()
+                    percentage_drop_threshold=(-1* drop_percent / 100),
+                    moving_days_average_window=MA,
+                    gain_strategy=gain_strategy).run_workers_pool()
