@@ -27,7 +27,7 @@ class LookupPricesAtRandomMonths(GainStrategyIF):
             record = {
                 "ticker": ticker,
                 "DropDate": drop_date.date(),
-                "Close": round(row["Close"].iloc[0], 2),
+                "Close": round(row["closeadj"].iloc[0], 2),
                 "PctChange": f"{round(100 * row['PctChange'].iloc[0], 2)}%"
             }
 
@@ -40,7 +40,7 @@ class LookupPricesAtRandomMonths(GainStrategyIF):
                 if len(future_dates) > 0:
                     future_date = future_dates[0]
                     # percentage_diff = round(100*(data.loc[future_date, 'Close'][0]-row['Close'][0])/row['Close'][0],1)
-                    record[f"Close+{label}"] = entire_ticker_data.loc[future_date, 'Close'].iloc[0]
+                    record[f"Close+{label}"] = entire_ticker_data.loc[future_date, 'closeadj'].iloc[0]
                 else:
                     record[f"Close+{label}"] = None
 
@@ -70,15 +70,15 @@ class FirstGainAbovePercent(GainStrategyIF):
             record = {
                 "ticker": ticker,
                 "DropDate": drop_date.date(),
-                "Close": round(row["Close"].item(), 2),
-                "PctChange": f"{round(100 * row['PctChange'].iloc[0], 2)}%"
+                "Close": round(row["closeadj"], 2),
+                "PctChange": f"{round(100 * row['PctChange'], 2)}%"
             }
 
-            closes = entire_ticker_data["Close"].to_numpy()
+            closes = entire_ticker_data["closeadj"].to_numpy()
             dates = entire_ticker_data.index.to_numpy()
             i = entire_ticker_data.index.get_loc(idx)
 
-            target = row["Close"].item() * (1 + self._percentage_to_pass / 100)
+            target = row["closeadj"] * (1 + self._percentage_to_pass / 100)
 
             # Find the first index *after i* where Close > target
             mask = closes[i + 1:] > target
@@ -86,10 +86,6 @@ class FirstGainAbovePercent(GainStrategyIF):
             first_up_date = dates[j]
             first_up_price = round(closes[j].item(),2)
 
-
-            # up_mask = (entire_ticker_data.index > idx) & (entire_ticker_data["Close"] > row["Close"].item() * (1 + self._percentage_to_pass/100)).squeeze()
-            # first_up_date = entire_ticker_data[up_mask].index[0]
-            # first_up_price = entire_ticker_data[up_mask]["Close"].iloc[0].item()
             record[f"up_{self._percentage_to_pass}%_from_drop_date"] = first_up_date
             record[f"price_at_up"] = first_up_price
             record[f'Days_to_be_up_{self._percentage_to_pass}%_from_drop'] = (first_up_date - idx).days

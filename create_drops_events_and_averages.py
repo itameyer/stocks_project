@@ -1,12 +1,13 @@
 import multiprocessing
-import yfinance as yf
+import nasdaqdatalink
 from multiprocessing import Pool
 import pandas as pd
 import os
 from typing import List, NamedTuple
-
 from gain_strategy import GainStrategyIF, LookupPricesAtRandomMonths, FirstGainAbovePercent
 
+API_KEY = "yZMdFB7ybWMNkpv_NA3v"
+nasdaqdatalink.ApiConfig.api_key = API_KEY
 
 class TickerInterval(NamedTuple):
     ticker: str
@@ -72,7 +73,7 @@ class DropsFinder:
 
 
     def _enrich_df(self, full_df: pd.DataFrame):
-        full_df[f"MA{self._moving_days_average_window}"] = full_df["Close"].rolling(window=self._moving_days_average_window).mean()
+        full_df[f"MA{self._moving_days_average_window}"] = full_df["closeadj"].rolling(window=self._moving_days_average_window).mean()
         full_df["PctChange"] = full_df[f"MA{self._moving_days_average_window}"].pct_change(periods=self._moving_days_average_window)
 
     def _find_drops(self, full_df: pd.DataFrame, start_Date: pd.Timestamp, end_date: pd.Timestamp) -> pd.DataFrame:
@@ -88,8 +89,8 @@ class DropsFinder:
 
     def _find_drop_and_record_price(self, relevant_ticker: TickerInterval):
         try:
-            data = yf.download(relevant_ticker.ticker, start=self._start_date, interval=self.INTERVAL)
-            data.index = pd.to_datetime(data.index)
+            data = nasdaqdatalink.get_table('SHARADAR/SEP', date={'gte': self._start_date}, ticker=relevant_ticker.ticker).iloc[::-1]
+            data.index = pd.to_datetime(data.date)
 
             self._enrich_df(data)
             matches = self._find_drops(data, relevant_ticker.start_date, relevant_ticker.end_date)
@@ -120,9 +121,9 @@ class DropsFinder:
 if __name__ == "__main__":
     MA = 5
     drop_percent = 10
-    since_year = 2005
+    since_year = 2015
     rise_percent = 5
-    directory = f"time_to_rise/since_{since_year}/time_to_rise_{rise_percent}%_MA{MA}_drop_{drop_percent}%"
+    directory = f"nasdaqdatalink_artifacts/time_to_rise/since_{since_year}/time_to_rise_{rise_percent}%_MA{MA}_drop_{drop_percent}%"
     gain_strategy = FirstGainAbovePercent(rise_percent)
     with multiprocessing.Manager() as manager:
         DropsFinder(directory=directory,
