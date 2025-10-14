@@ -3,10 +3,13 @@ from abc import ABC
 import os
 import pandas as pd
 from pandas.tseries.offsets import DateOffset
-
+import numpy as np
 
 class GainStrategyIF(ABC):
     def record_gain_strategy(self, drop_matches: pd.DataFrame, entire_ticker_data: pd.DataFrame, ticker: str, output_file_path: str, output_file_lock: multiprocessing.Lock):
+        pass
+
+    def aggregate_results(self, output_file_path: str):
         pass
 
 class LookupPricesAtRandomMonths(GainStrategyIF):
@@ -49,6 +52,8 @@ class LookupPricesAtRandomMonths(GainStrategyIF):
                 output_file_exists = os.path.exists(output_file_path)
                 df_table.to_csv(output_file_path, mode='a', index=False, header=not output_file_exists)
 
+    def aggregate_results(self, output_file_path: str):
+        pass
 
 class FirstGainAbovePercent(GainStrategyIF):
     def __init__(self, percentage_to_pass: float):
@@ -69,9 +74,22 @@ class FirstGainAbovePercent(GainStrategyIF):
                 "PctChange": f"{round(100 * row['PctChange'].iloc[0], 2)}%"
             }
 
-            up_mask = (entire_ticker_data.index > idx) & (entire_ticker_data["Close"] > row["Close"].item() * (1 + self._percentage_to_pass/100)).squeeze()
-            first_up_date = entire_ticker_data[up_mask].index[0]
-            first_up_price = entire_ticker_data[up_mask]["Close"].iloc[0].item()
+            closes = entire_ticker_data["Close"].to_numpy()
+            dates = entire_ticker_data.index.to_numpy()
+            i = entire_ticker_data.index.get_loc(idx)
+
+            target = row["Close"].item() * (1 + self._percentage_to_pass / 100)
+
+            # Find the first index *after i* where Close > target
+            mask = closes[i + 1:] > target
+            j = i + 1 + np.argmax(mask)
+            first_up_date = dates[j]
+            first_up_price = round(closes[j].item(),2)
+
+
+            # up_mask = (entire_ticker_data.index > idx) & (entire_ticker_data["Close"] > row["Close"].item() * (1 + self._percentage_to_pass/100)).squeeze()
+            # first_up_date = entire_ticker_data[up_mask].index[0]
+            # first_up_price = entire_ticker_data[up_mask]["Close"].iloc[0].item()
             record[f"up_{self._percentage_to_pass}%_from_drop_date"] = first_up_date
             record[f"price_at_up"] = first_up_price
             record[f'Days_to_be_up_{self._percentage_to_pass}%_from_drop'] = (first_up_date - idx).days
@@ -101,4 +119,5 @@ class FirstGainAbovePercent(GainStrategyIF):
         df_table.to_csv(aggregation_file_path, mode='a', index=False, header=True)
 
 if __name__ == "__main__":
-    FirstGainAbovePercent(0.1).aggregate_results("C:/Users/itameyer/Documents/pythonProject/stocks_project/time_to_rise/since_2015/time_to_rise_10.0%_MA5_drop_10%/prices.csv")
+    FirstGainAbovePercent(5).aggregate_results(
+        "yfinance_artifacts/time_to_rise/since_2015/time_to_rise_5%_MA5_drop_10%/prices.csv")

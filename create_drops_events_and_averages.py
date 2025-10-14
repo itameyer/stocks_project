@@ -76,7 +76,7 @@ class DropsFinder:
         full_df["PctChange"] = full_df[f"MA{self._moving_days_average_window}"].pct_change(periods=self._moving_days_average_window)
 
     def _find_drops(self, full_df: pd.DataFrame, start_Date: pd.Timestamp, end_date: pd.Timestamp) -> pd.DataFrame:
-        cond_percentage_drop = full_df["PctChange"] < self._percentage_drop_threshold
+        cond_percentage_drop = full_df["PctChange"] < (-1 * self._percentage_drop_threshold / 100)
         cond_start_date = full_df.index > start_Date
         if pd.isna(end_date) or end_date is None:
             cond_end_date = pd.Series(True, index=full_df.index)
@@ -106,27 +106,30 @@ class DropsFinder:
         relevant_tickers_df = ticker_extractor.find_relevant_tickers(self._start_date)
         relevant_tickers = [TickerInterval(*x) for _, x in relevant_tickers_df.iterrows()]
 
-        # with Pool(processes=8) as pool:
-        #     results = [pool.apply_async(self._find_drop_and_record_price, (y,) ) for y in relevant_tickers]
-        #
-        #     for r in results:
-        #         r.wait()
+        with Pool(processes=8) as pool:
+            results = [pool.apply_async(self._find_drop_and_record_price, (y,) ) for y in relevant_tickers]
 
-        for y in relevant_tickers:
-            self._find_drop_and_record_price(y)
+            for r in results:
+                r.wait()
+
+        # for y in relevant_tickers:
+        #     self._find_drop_and_record_price(y)
+        self._gain_strategy.aggregate_results(self._output_file)
 
 
 if __name__ == "__main__":
     MA = 5
     drop_percent = 10
-    since_year = 2015
-    rise_percent = 0.1
-    directory = f"time_to_rise/since_{since_year}/time_to_rise_{rise_percent*100}%_MA{MA}_drop_{drop_percent}%"
+    since_year = 2005
+    rise_percent = 5
+    directory = f"time_to_rise/since_{since_year}/time_to_rise_{rise_percent}%_MA{MA}_drop_{drop_percent}%"
     gain_strategy = FirstGainAbovePercent(rise_percent)
     with multiprocessing.Manager() as manager:
         DropsFinder(directory=directory,
                     lock=manager.Lock(),
                     start_date=pd.Timestamp(since_year, 1, 1),
-                    percentage_drop_threshold=(-1* drop_percent / 100),
+                    percentage_drop_threshold=drop_percent,
                     moving_days_average_window=MA,
                     gain_strategy=gain_strategy).run_workers_pool()
+
+# data = yf.download("BDK", start=(2005, 1, 1), interval="1d")
