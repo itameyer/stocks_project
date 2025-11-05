@@ -100,7 +100,7 @@ class DropsAndUpsFinder:
                 f.write(str(e))
 
     def run_workers_pool(self):
-        snp_tickers_df = pd.read_csv("100_companies/10_companies.csv", usecols=["ticker", "start_date","end_date"])
+        snp_tickers_df = pd.read_csv("sp500_ticker_start_end.csv", usecols=["ticker", "start_date","end_date"])
         ticker_extractor = Snp500TickersExtractor(snp_tickers_df)
         relevant_tickers_df = ticker_extractor.find_relevant_tickers(self._start_date)
         relevant_tickers = [TickerInterval(*x) for _, x in relevant_tickers_df.iterrows()]
